@@ -10,7 +10,11 @@
   <p>Press ALT to view the menu bar at any time</p>
   <div>
     <form ngForm (ngSubmit)="submitForm()">
-      Start URL: <input type="url" [(ngModel)]="settings.startUrl" /><br />
+      Start URL: <input name="startUrl" type="url" [(ngModel)]="settings.startUrl" /><br />
+      TwinCAT HMI User: <input name="tcHmiUser" type="text" [(ngModel)]="settings.tcHmiUser" /><br />
+      TwinCAT HMI Password: <input name="tcHmiPassword" type="password" [(ngModel)]="settings.tcHmiPassword" /><br />
+      TwinCAT HMI Auto login: <input name="tcHmiAutoLogin" type="checkbox"
+        [(ngModel)]="settings.tcHmiAutoLogin" /><br />
       <button type="submit">Save</button>
     </form>
 

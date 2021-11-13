@@ -64,6 +64,13 @@ function createWindow() {
     // Access form data here
     appSettings = data;
     writeSettings();
+    autoLoginDone = false;
+  });
+
+  var autoLoginDone: boolean = false;
+  ipcMain.handle('autologin-done', function (event, data) {
+    autoLoginDone ||= data;
+    return autoLoginDone;
   });
 
 
@@ -91,7 +98,7 @@ function openSettings(mainWindow: BrowserWindow, currentWindow: BrowserWindow) {
 }
 
 function writeSettings() {
-  fs.writeFile(settingsFilename, JSON.stringify(appSettings), () => console.log("Default settings written!"));
+  fs.writeFile(settingsFilename, JSON.stringify(appSettings), () => console.log("New settings written!"));
 }
 
 // This method will be called when Electron has finished

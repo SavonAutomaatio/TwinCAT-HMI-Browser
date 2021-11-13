@@ -18,7 +18,10 @@ export class AppComponent {
     this._ipc.on("settings-change", (event, data) => {
       this.settings = <AppSettings>data;
     });
-    this._ipc.invoke("settings-get").then((newSettings) => this.settings = newSettings)
+    this._ipc.invoke("settings-get").then((newSettings) => {
+      this.settings = newSettings;
+      console.log(this.settings);
+    });
   }
 
   submitForm() {
