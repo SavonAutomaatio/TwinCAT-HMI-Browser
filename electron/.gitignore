@@ -90,3 +90,6 @@ out/
 
 # Angular
 dist/
+
+# Other
+settings.json
