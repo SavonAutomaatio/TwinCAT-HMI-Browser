@@ -14,7 +14,7 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
-const settingsFilename: string = "settings.json";
+const settingsFilename: string = app.getPath("userData") + "/settings.json";
 
 var appSettings: AppSettings = new AppSettings();
 
@@ -98,7 +98,7 @@ function openSettings(mainWindow: BrowserWindow, currentWindow: BrowserWindow) {
 }
 
 function writeSettings() {
-  fs.writeFile(settingsFilename, JSON.stringify(appSettings), () => console.log("New settings written!"));
+  fs.writeFile(settingsFilename, JSON.stringify(appSettings), () => console.log("New settings written to %s!", settingsFilename));
 }
 
 // This method will be called when Electron has finished
