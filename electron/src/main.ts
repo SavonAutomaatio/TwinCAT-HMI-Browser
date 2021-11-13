@@ -5,6 +5,10 @@ import { AppSettings } from "./interfaces";
 import { Menu } from 'electron';
 
 
+// Allow self signed certificates
+app.commandLine.appendSwitch('ignore-certificate-errors');
+
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();

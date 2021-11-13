@@ -1,6 +1,6 @@
 {
   "name": "twincat-hmi-browser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A fullscreen-only browser for TwinCAT HMI applications based on Electron",
   "scripts": {
     "start": "tsc && electron-forge start",
