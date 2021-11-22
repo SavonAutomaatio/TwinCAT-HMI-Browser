@@ -5,6 +5,8 @@ import { AppSettings } from "./interfaces";
 import { Menu } from 'electron';
 
 
+const gotTheLock = app.requestSingleInstanceLock();
+
 // Allow self signed certificates
 app.commandLine.appendSwitch('ignore-certificate-errors');
 
@@ -18,7 +20,7 @@ const settingsFilename: string = app.getPath("userData") + "/settings.json";
 
 var appSettings: AppSettings = new AppSettings();
 
-function createWindow() {
+function createWindow(): BrowserWindow {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     webPreferences: {
@@ -76,6 +78,7 @@ function createWindow() {
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
+  return mainWindow;
 }
 
 function openSettings(mainWindow: BrowserWindow, currentWindow: BrowserWindow) {
@@ -101,18 +104,31 @@ function writeSettings() {
   fs.writeFile(settingsFilename, JSON.stringify(appSettings), () => console.log("New settings written to %s!", settingsFilename));
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on("ready", () => {
-  createWindow();
-
-  app.on("activate", function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+let myWindow: BrowserWindow = null;
+if (!gotTheLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event: Event, argv: string[], workingDirectory: string) => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (myWindow) {
+      if (myWindow.isMinimized()) myWindow.restore();
+      myWindow.focus();
+    }
   });
-});
+
+  // This method will be called when Electron has finished
+  // initialization and is ready to create browser windows.
+  // Some APIs can only be used after this event occurs.
+  app.on("ready", () => {
+    myWindow = createWindow();
+
+    app.on("activate", function () {
+      // On macOS it's common to re-create a window in the app when the
+      // dock icon is clicked and there are no other windows open.
+      if (BrowserWindow.getAllWindows().length === 0) myWindow = createWindow();
+    });
+  });
+}
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
