@@ -25,6 +25,8 @@ function createWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: path.join(__dirname, "../dist/preload.js"),
+      allowRunningInsecureContent: true,
+      webSecurity: false,
     },
     fullscreen: true,
     autoHideMenuBar: true
