@@ -3,4 +3,5 @@ export class AppSettings {
     tcHmiUser?: string;
     tcHmiPassword?: string;
     tcHmiAutoLogin?: boolean;
+    customLocale?: string = "fi";
 }

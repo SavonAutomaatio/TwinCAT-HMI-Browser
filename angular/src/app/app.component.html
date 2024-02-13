@@ -15,6 +15,37 @@
       TwinCAT HMI Password: <input name="tcHmiPassword" type="password" [(ngModel)]="settings.tcHmiPassword" /><br />
       TwinCAT HMI Auto login: <input name="tcHmiAutoLogin" type="checkbox"
         [(ngModel)]="settings.tcHmiAutoLogin" /><br />
+      Custom locale: <select name="customLocale" [(ngModel)]="settings.customLocale">
+        <option value="af">af</option>bg
+        <option value="cs">cs</option>el
+        <option value="es-419">es-419</option>fa
+        <option value="fr">fr</option>hi
+        <option value="id">id</option>kn
+        <option value="lv">lv</option>ms
+        <option value="pl">pl</option>ro
+        <option value="sl">sl</option>sw
+        <option value="th">th</option>ur
+        <option value="zh-TW">zh-TW</option>am
+        <option value="bn">bn</option>da
+        <option value="en-GB">en-GB</option>es
+        <option value="fi">fi</option>gu
+        <option value="hr">hr</option>it
+        <option value="ko">ko</option>ml
+        <option value="nb">nb</option>pt-BR
+        <option value="ru">ru</option>sr
+        <option value="ta">ta</option>tr
+        <option value="vi">vi</option>ar
+        <option value="ca">ca</option>de
+        <option value="en-US">en-US</option>et
+        <option value="fil">fil</option>he
+        <option value="hu">hu</option>ja
+        <option value="lt">lt</option>mr
+        <option value="nl">nl</option>pt-PT
+        <option value="sk">sk</option>sv
+        <option value="te">te</option>uk
+        <option value="zh-CN">zh-CN</option>
+      </select>
+      <br />
       <button type="submit">Save</button>
     </form>
 

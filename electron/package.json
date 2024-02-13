@@ -1,6 +1,6 @@
 {
   "name": "twincat-hmi-browser",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A fullscreen-only browser for TwinCAT HMI applications based on Electron",
   "scripts": {
     "start": "tsc && electron-forge start",
@@ -14,16 +14,16 @@
   "author": "Savon Automaatio",
   "license": "MIT",
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.61",
-    "@electron-forge/maker-deb": "^6.0.0-beta.61",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
-    "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "@typescript-eslint/eslint-plugin": "^5.3.1",
-    "@typescript-eslint/parser": "^5.3.1",
-    "electron": "^15.2.0",
+    "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-deb": "^7.2.0",
+    "@electron-forge/maker-rpm": "^7.2.0",
+    "@electron-forge/maker-squirrel": "^7.2.0",
+    "@electron-forge/maker-zip": "^7.2.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "electron": "^23.3.13",
     "eslint": "^8.2.0",
-    "typescript": "^4.4.4"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"

@@ -10,7 +10,6 @@ const gotTheLock = app.requestSingleInstanceLock();
 // Allow self signed certificates
 app.commandLine.appendSwitch('ignore-certificate-errors');
 
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -19,6 +18,16 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const settingsFilename: string = app.getPath("userData") + "/settings.json";
 
 var appSettings: AppSettings = new AppSettings();
+
+// Load settings file if exists
+if (fs.existsSync(settingsFilename)) {
+  appSettings = JSON.parse(fs.readFileSync(settingsFilename).toString());
+}
+
+// Change locale if needed
+if (appSettings.customLocale?.length > 0) {
+  app.commandLine.appendSwitch('lang', appSettings.customLocale);
+}
 
 function createWindow(): BrowserWindow {
   // Create the browser window.
@@ -48,11 +57,6 @@ function createWindow(): BrowserWindow {
   }));
 
   mainWindow.setMenu(menu);
-
-
-  if (fs.existsSync(settingsFilename)) {
-    appSettings = JSON.parse(fs.readFileSync(settingsFilename).toString());
-  }
 
   // Load settings page if startUrl is empty
   if (appSettings.startUrl == "") {
