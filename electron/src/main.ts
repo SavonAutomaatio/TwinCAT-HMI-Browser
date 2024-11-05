@@ -46,7 +46,7 @@ function createWindow(): BrowserWindow {
   menu.append(new MenuItem({
     label: 'Start page',
     //accelerator: 'CommandOrControl+Shift+I',
-    click: () => mainWindow.loadURL(appSettings.startUrl)
+    click: () => { if (isValidUrl(appSettings.startUrl)) mainWindow.loadURL(appSettings.startUrl) }
   }));
 
 
@@ -59,10 +59,10 @@ function createWindow(): BrowserWindow {
   mainWindow.setMenu(menu);
 
   // Load settings page if startUrl is empty
-  if (appSettings.startUrl == "") {
+  if (appSettings.startUrl.trim() == "" || !isValidUrl(appSettings.startUrl)) {
     openSettings(mainWindow, mainWindow);
+    mainWindow.loadURL("about:blank");
   } else {
-    // Load the page
     mainWindow.loadURL(appSettings.startUrl);
   }
   ipcMain.handle('settings-get', function (event, data) {
@@ -85,6 +85,15 @@ function createWindow(): BrowserWindow {
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
   return mainWindow;
+}
+
+function isValidUrl(url: string): boolean {
+  try {
+    new URL(url);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 function openSettings(mainWindow: BrowserWindow, currentWindow: BrowserWindow) {
